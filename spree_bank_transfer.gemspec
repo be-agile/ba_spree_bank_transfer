@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_frontend', spree_version
   s.add_dependency 'spree_extension'
   s.add_dependency 'deface', '~> 1.0'
-  s.add_dependency 'jquery-rails', ' ~> 4.3.5'
+  s.add_dependency 'jquery-rails', ' ~> 4.6.0'
   s.add_dependency 'jquery-ui-rails', ' ~> 6.0.1'
 
   s.add_development_dependency "bundler"
