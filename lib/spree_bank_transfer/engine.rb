@@ -1,10 +1,10 @@
 module SpreeBankTransfer
   class Engine < Rails::Engine
     require 'spree/core'
-    isolate_namespace Spree
+    isolate_namespace SpreeCash0nDelivery
     engine_name 'spree_bank_transfer'
 
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W[#{config.root}/lib]
 
     # use rspec for tests
     config.generators do |g|
@@ -17,10 +17,10 @@ module SpreeBankTransfer
       end
     end
 
-    config.to_prepare &method(:activate).to_proc
-
-    initializer "spree.spree_bank_transfer.payment_methods", after: "spree.register.payment_methods" do |app|
-      app.config.spree.payment_methods << Spree::PaymentMethod::BankTransfer
+    config.after_initialize do
+      Rails.application.config.spree.payment_methods << Spree::PaymentMethod::BankTransfer
     end
+
+    config.to_prepare(&method(:activate).to_proc)
   end
 end
