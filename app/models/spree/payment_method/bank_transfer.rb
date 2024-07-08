@@ -1,12 +1,13 @@
 module Spree
   class PaymentMethod::BankTransfer < PaymentMethod
+
     def actions
-      %w[capture void]
+      %w{capture void}
     end
 
     # Indicates whether its possible to capture the payment
     def can_capture?(payment)
-      %w[checkout pending].include?(payment.state)
+      ['checkout', 'pending'].include?(payment.state)
     end
 
     # Indicates whether its possible to void the payment.
@@ -14,11 +15,11 @@ module Spree
       payment.state != 'void'
     end
 
-    def capture(*_args)
+    def capture(*args)
       simulated_successful_billing_response
     end
 
-    def void(*_args)
+    def void(*args)
       simulated_successful_billing_response
     end
 
@@ -26,7 +27,7 @@ module Spree
       false
     end
 
-    def credit(*_args)
+    def credit(*args)
       simulated_successful_billing_response
     end
 
@@ -36,12 +37,12 @@ module Spree
 
     private
 
-    def public_preference_keys
-      super + [:bank_accounts]
+    def simulated_successful_billing_response
+      ActiveMerchant::Billing::Response.new(true, "", {}, {})
     end
 
-    def simulated_successful_billing_response
-      ActiveMerchant::Billing::Response.new(true, '', {}, {})
+    def public_preference_keys
+      super + [:bank_accounts]
     end
   end
 end
