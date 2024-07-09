@@ -31,11 +31,18 @@ module Spree
       simulated_successful_billing_response
     end
 
+    def public_preferences
+      super.merge(bank_accounts: Spree::Bank.active)
+    end
+
     private
 
-      def simulated_successful_billing_response
-        ActiveMerchant::Billing::Response.new(true, "", {}, {})
-      end
-  end
+    def simulated_successful_billing_response
+      ActiveMerchant::Billing::Response.new(true, "", {}, {})
+    end
 
+    def public_preference_keys
+      super + [:bank_accounts]
+    end
+  end
 end
