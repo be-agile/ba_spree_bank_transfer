@@ -1,7 +1,6 @@
 module Spree
   module Admin
-    module NavigationHelper
-
+    module NavigationHelperDecorator
       def link_to_with_icon(icon_name, text, url, options = {})
         options[:class] = (options[:class].to_s + " icon-link with-tip action-#{icon_name}").strip
         options[:class] += ' no-text' if options[:no_text]
@@ -15,7 +14,8 @@ module Spree
         end
         link_to(text.html_safe, url, options)
       end
-
     end
   end
-end      
+end
+
+Spree::Admin::NavigationHelper.prepend(Spree::Admin::NavigationHelperDecorator)
