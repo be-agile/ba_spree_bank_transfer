@@ -1,7 +1,7 @@
 module SpreeBankTransfer
   class Engine < Rails::Engine
     require 'spree/core'
-    isolate_namespace SpreeCash0nDelivery
+    isolate_namespace SpreeBankTransfer
     engine_name 'spree_bank_transfer'
 
     config.autoload_paths += %W[#{config.root}/lib]
