@@ -15,6 +15,15 @@ module SpreeBankTransfer
       Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
+      Spree.user_class.class_eval do
+        has_many :payments, through: :orders
+      end
+    end
+
+    initializer 'spree_bank_transfer.autoloader' do |app|
+      if Rails.autoloaders.zeitwerk_enabled?
+        Rails.autoloaders.main.ignore("#{root}/app/overrides")
+      end
     end
 
     config.after_initialize do
