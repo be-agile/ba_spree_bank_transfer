@@ -28,6 +28,11 @@ module SpreeBankTransfer
 
     config.after_initialize do
       Rails.application.config.spree.payment_methods << Spree::PaymentMethod::BankTransfer
+      settings = Rails.application.config.spree_backend.main_menu.items.find { |item| item.key == "settings" }
+      settings.items << Spree::Admin::MainMenu::ItemBuilder.new('banks', Spree::Core::Engine.routes.url_helpers.admin_banks_path).
+        with_match_path('/banks').
+        with_manage_ability_check(Spree::Bank).
+        build
     end
 
     config.to_prepare(&method(:activate).to_proc)
