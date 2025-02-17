@@ -1,0 +1,25 @@
+ja:
+  spree:
+    account_no: 口座番号
+    add_details: 詳細を追加
+    additional_details: 追加詳細
+    back_to_banks_list: 銀行一覧に戻る
+    banks: 銀行
+    bank_name: 銀行名
+    confirm_details_submit: これらの詳細を送信してもよろしいですか？送信後は編集できなくなります。「OK」を押して確認してください。
+    deactivate: 無効化
+    deposited_on: 入金日
+    how_bank_transfer_works: 銀行振込について
+    listing_banks: 銀行一覧
+    new_bank: 新規銀行
+    only_show_orders_with_bank_transfer_payment_reference_number: 銀行振込の支払い参照番号がある注文のみ表示
+    payment_not_found: 支払いが見つかりません
+    payment_successfully_updated: 支払いが正常に更新されました
+    payment_reference_details: 銀行振込支払い参照詳細
+    transaction_reference_no: 取引参照番号
+    receipt: "領収書"
+  activerecord:
+    models:
+      spree/bank:
+        one: 銀行
+        other: 銀行
