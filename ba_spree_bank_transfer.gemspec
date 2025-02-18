@@ -5,27 +5,26 @@ require 'spree_bank_transfer/version'
 
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'spree_bank_transfer'
-  s.version     = '4.1.0'
-  s.summary     = 'Spree extension to create bank transfer payment method.'
-  s.description = 'This Spree extension allows admin to provide bank transfer payment method to its users.'
-  s.required_ruby_version = '>= 2.1.0'
+  s.name        = 'ba_spree_bank_transfer'
+  s.version     = SpreeBankTransfer::VERSION
+  s.summary     = 'Spree extension to create bank transfer payment method. (be agile fork)'
+  s.description = 'This Spree extension provides bank transfer payment method functionality. Compatible with Ruby 3.1, Rails 7.1 and Spree 4.10.'
+  s.required_ruby_version = '>= 3.1.4'
 
-  s.author    = 'Mohit Bansal'
-  s.email     = 'info@vinsol.com'
-  s.homepage  = 'http://vinsol.com'
-  s.license   = "MIT"
+  s.author      = 'be agile Co., Ltd.'
+  s.email       = 'develop@be-agile.jp'
+  s.homepage    = 'https://github.com/be-agile/ba_spree_bank_transfer'
+  s.licenses    = ['AGPL-3.0-or-later', 'BSD-3-Clause']
 
   s.files        = `git ls-files`.split("\n")
   s.test_files   = `git ls-files -- spec/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  spree_version =  '>= 3.1.0', '< 5.0'
-  s.add_dependency 'spree_core', spree_version
-  s.add_dependency 'spree_backend', spree_version
-  s.add_dependency 'spree_frontend', spree_version
-  s.add_dependency 'spree_extension'
+  s.add_dependency 'spree_core', '>= 4.10.0'
+  s.add_dependency 'spree_backend', '>= 4.8.0'
+  s.add_dependency 'spree_frontend', '>= 4.8.0'
+  s.add_dependency 'spree_extension', '>= 0.1.0'
   s.add_dependency 'deface', '~> 1.0'
   s.add_dependency 'jquery-rails', ' ~> 4.6.0'
   s.add_dependency 'jquery-ui-rails', ' ~> 6.0.1'
