@@ -7,8 +7,8 @@ ba_spree_bank_transfer is an extension which allows adding a new payment method 
 ## Features
 
 * Supports Ruby 3.1
-* Supports Rails 7.1
-* Supports Spree 4.10
+* Supports Rails 7.2
+* Supports Spree 5.3
 * Japanese translations included
 * Actively maintained with contributions back to the original project
 
@@ -29,7 +29,7 @@ bundle install
 3. Copy & run migrations:
 
 ```shell
-bundle exec rails g ba_spree_bank_transfer:install
+bundle exec rails g spree_bank_transfer:install
 ```
 
 ## How it works
@@ -107,4 +107,4 @@ This extension is available as open source under the terms of either:
 ## Credits
 
 Originally created by Vinsol.
-Fork maintained by [be agile Co., Ltd.](https://be-agile.jp/).
+Fork maintained by [be agile Co., Ltd.](https://be-agile.jp/).%

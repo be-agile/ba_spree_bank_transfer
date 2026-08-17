@@ -1,14 +1,16 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:editing_resource, resource: Spree::Bank.model_name.human) %> / <%= @bank.name %>
+  <%= link_to Spree.t(:back_to_banks_list), admin_banks_path %> /
+  <span><%= @bank.name %></span>
 <% end %>
 
-<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @bank } %>
+<div class="card">
+  <div class="card-body">
+    <%= form_for @bank, url: admin_bank_path(@bank) do |f| %>
+      <%= render partial: 'form', locals: { f: f } %>
 
-<%= form_for @bank, url: admin_bank_path(@bank) do |f| %>
-  <fieldset>
-    <%= render partial: 'form', locals: { f: f } %>
-    <div data-hook="buttons" class="actions">
-      <%= button Spree.t('actions.update'), 'save' %>
-    </div>
-  </fieldset>
-<% end %>
+      <div class="form-actions" data-hook="buttons">
+        <%= button Spree.t('admin.materials.btn.send'), 'save.svg' %>
+      </div>
+    <% end %>
+  </div>
+</div>

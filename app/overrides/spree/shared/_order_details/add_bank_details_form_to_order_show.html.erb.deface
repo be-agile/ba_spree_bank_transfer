@@ -1,0 +1,2 @@
+<!-- insert_after "div:has(> erb[loud]:contains('spree/shared/payment'))" -->
+<%= render 'spree_bank_transfer/orders/bank_transfer_form' %>

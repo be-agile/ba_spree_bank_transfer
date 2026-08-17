@@ -1,0 +1,3 @@
+<%= turbo_stream.replace spree_dom_id(@bank) do %>
+  <%= render 'spree_bank_transfer/admin/banks/bank_row', bank: @bank %>
+<% end %>

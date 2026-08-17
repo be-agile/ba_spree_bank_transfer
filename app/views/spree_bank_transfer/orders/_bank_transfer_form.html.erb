@@ -1,0 +1,44 @@
+<% bank_transfer_payment = @order.payments.last %>
+<% if bank_transfer_payment.bank_transfer_payment? %>
+  <% if bank_transfer_payment.details_submitted? %>
+    <div class="bank-transfer-summary mt-3 mb-3">
+      <p class="text-success font-weight-bold mb-0">
+        <i class="fas fa-check-circle"></i> <%= Spree.t(:bank_transfer_completed) %>
+      </p>
+      <p class="mb-0"><%= Spree.t(:deposited_on) %>: <%= l(bank_transfer_payment.deposited_on, format: :middle) %></p>
+      <p class="mb-0"><%= Spree.t(:bank_name) %>: <%= bank_transfer_payment.bank_name %></p>
+
+      <a href="<%= main_app.url_for(bank_transfer_payment.receipt) %>" target="_blank" class="inline-block btn-primary mt-3"><%= Spree.t(:view_receipt) %></a>
+    </div>
+  <% else %>
+    <div class="bank-transfer-form-container" data-controller="toggle">
+      <button class="btn-primary mt-3 mb-3" data-action="click->toggle#toggle"><%= Spree.t(:add_details) %></button>
+
+      <%= form_for(bank_transfer_payment, data: { toggle_target: 'toggleable' }, html: { class: "bank-transfer-form #{'hidden' if flash[:error].blank?}" }) do |f| %>
+        <div class="mb-4">
+          <%= f.label Spree.t(:deposited_on), class: 'block text-xs text-neutral-600 mb-1' %>
+          <%= f.date_field :deposited_on, class: 'text-input w-full', required: true %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label Spree.t(:bank_name), class: 'block text-xs text-neutral-600 mb-1' %>
+          <%= f.select :bank_name, options_for_select(Spree::Bank.pluck(:name)), {}, { class: 'select-input w-full', required: true } %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label Spree.t(:receipt), class: 'block text-xs text-neutral-600 mb-1' %>
+          <%= f.file_field(
+                :receipt,
+                class: 'p-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white focus:outline-none',
+                required: true,
+                accept: Spree::Payment::RECEIPT_VALID_TYPES.join(", ")
+              ) %>
+        </div>
+
+        <div class="text-right">
+          <%= f.submit Spree.t('actions.save'), class: 'btn-primary', confirm: Spree.t(:confirm_details_submit) %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

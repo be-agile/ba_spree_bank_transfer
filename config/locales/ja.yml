@@ -17,9 +17,29 @@ ja:
     payment_successfully_updated: 支払いが正常に更新されました
     payment_reference_details: 銀行振込支払い参照詳細
     transaction_reference_no: 取引参照番号
-    receipt: "領収書"
+    receipt: 振込明細書
+    bank_transfer_fees_info: "振込手数料のご負担を願います。"
+    bank_transfer_instructions:
+      title: '銀行振込によるお支払い方法'
+      steps_title: '御請求書は、ご注文確定後の返信メールに添付しております。'
+      step_1_text: '下記の銀行口座にご注文金額を全額お振込みください。'
+      step_2_text: 'システム上で支払い証明書を添付してください。'
+      step_2_substeps:
+        - '"マイアカウント" ページへアクセスします。'
+        - '注文を選択します。'
+        - '"詳細を追加" をクリックします。'
+        - '情報を入力し、「確認」ボタンをクリックします。'
+      payment_image_alt: '振込詳細'
+    bank_transfer_completed: 振込情報のご入力は完了しています
+    view_receipt: 振込明細書
   activerecord:
     models:
       spree/bank:
         one: 銀行
         other: 銀行
+    errors:
+      models:
+        spree/payment:
+          attributes:
+            receipt:
+              invalid_file_type: アップロードされたファイルは有効な画像でなければなりません。

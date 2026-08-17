@@ -1,0 +1,31 @@
+<!-- insert_after ".card-body" -->
+<% if Spree::Payment.valid.exists?(id: payment.id) && payment.bank_transfer_payment? %>
+  <div class="payment-reference-details card-body border-top border-top-dashed">
+    <h5 align="center"><%= Spree.t(:payment_reference_details) %></h5>
+
+    <table class="table table-sm table-bordered text-center">
+      <thead class="thead-light">
+        <tr>
+          <th><%= Spree.t(:deposited_on) %></th>
+          <th><%= Spree.t(:bank_name) %></th>
+          <th><%= Spree.t(:receipt) %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><%= payment.deposited_on %></td>
+          <td><%= payment.bank_name %></td>
+          <td>
+            <% if payment.receipt.attached? %>
+              <% url = main_app.url_for(payment.receipt) %>
+              <a href="<%= url %>" target="_blank">
+                <%= image_tag url, style: 'width: 200px' %>
+              </a>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>

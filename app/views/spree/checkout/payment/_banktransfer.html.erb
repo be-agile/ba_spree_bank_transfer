@@ -1,16 +1,31 @@
 <% if (banks = Spree::Bank.active).present? %>
-  <table class="table index">
-    <tr>
-      <th><%= Spree.t(:bank_name) %></th>
-      <th><%= Spree.t(:account_no) %></th>
-      <th><%= Spree.t(:additional_details) %></th>
-    </tr>
-    <% banks.each do |bank| %>
-      <tr>
-        <td><%= bank.name %></td>
-        <td><%= bank.account_no %></td>
-        <td><%= bank.additional_details %></td>
-      </tr>
-    <% end %>
-  </table>
+  <div class="relative overflow-auto">
+    <%= link_to(
+      Spree.t(:how_bank_transfer_works), 
+      bank_transfer_instructions_path, 
+      id: 'banktransfer_instructions', 
+      class: "mb-3 block hover:underline",
+      target: "_blank"
+    ) %>
+
+    <table class="text-sm text-left w-full">
+      <thead class="text-xs uppercase bg-gray-50 dark:bg-gray-700 ">
+        <tr>
+          <th class="px-6 py-3"><%= Spree.t(:bank_name) %></th>
+          <th class="px-6 py-3"><%= Spree.t(:account_no) %></th>
+          <th class="px-6 py-3"><%= Spree.t(:additional_details) %></th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <% banks.each do |bank| %>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+            <td class="px-3 py-3"><%= bank.name %></td>
+            <td class="px-3 py-3"><%= bank.account_no %></td>
+            <td class="px-3 py-3"><%= bank.additional_details %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>

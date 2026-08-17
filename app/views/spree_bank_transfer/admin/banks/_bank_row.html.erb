@@ -1,0 +1,20 @@
+<tr id="<%= spree_dom_id(bank) %>" data-hook="admin_banks_index_rows" class="<%= cycle('odd', 'even') %>">
+  <td><%= bank.name %></td>
+  <td><%= bank.account_no %></td>
+  <td><%= bank.additional_details %></td>
+  <td id='active-status-<%= bank.id %>'><%= bank_status(bank) %></td>
+  <td data-hook="admin_banks_index_row_status" id="toggle-status-<%= bank.id %>" class="text-right">
+    <% action_class = bank.active ? "btn-danger" : "btn-success" %>
+    <% btn_class = 'btn ' + action_class + ' btn-sm' %>
+    <%= link_to_with_icon(
+      action_text_to_toggle_bank_status(bank), 
+      action_to_toggle_bank_status(bank), 
+      toggle_activation_admin_bank_path(bank), 
+      data: { turbo_method: :put },
+      class: btn_class,
+    ) %>
+  </td>                       
+  <td data-hook="admin_banks_index_row_actions" class="text-right">
+    <%= (link_to_edit bank) if can?(:edit, bank) %>
+  </td>
+</tr>

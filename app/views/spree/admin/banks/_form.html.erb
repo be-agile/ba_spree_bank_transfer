@@ -1,26 +1,30 @@
 <div data-hook="admin_banks_form_fields">
-  <div class="row">
-    <%= f.field_container :name, class: ['form-group'] do %>
-      <%= f.label :name, Spree.t(:name) %> <span class="required">*</span><br />
-      <%= f.error_message_on :name, class: 'fullwidth title' %>
+  <% if @bank.try(:errors).present? %>
+    <%= render 'spree/admin/shared/error_messages', target: @bank %>
+  <% end %>
+
+  <div>
+    <div class="form-group">
+      <%= f.label :name, raw(Spree.t(:name) + required_span_tag) %>
       <%= f.text_field :name, class: 'form-control' %>
-    <% end %>
+    </div>
 
-    <%= f.field_container :account_no, class: ['form-group'] do %>
-      <%= f.label :account_no, Spree.t(:account_no) %><span class="required">*</span><br />
+    <div class="form-group">
+      <%= f.label :account_no, raw(Spree.t(:account_no) + required_span_tag) %>
       <%= f.text_field :account_no, class: 'form-control' %>
-    <% end %>
+    </div>
 
-    <%= f.field_container :additional_details, class: ['form-group'] do %>
-      <%= f.label :additional_details, Spree.t(:additional_details) %><br />
+    <div class="form-group">
+      <%= f.label :additional_details, Spree.t(:additional_details) %>
       <%= f.text_area :additional_details, rows: 10, class: 'form-control' %>
-    <% end %>
+    </div>
 
-    <%= f.field_container :active, class: ['checkbox'] do %>
+    <div class="form-group">
       <%= f.label :active do %>
         <%= f.check_box :active %>
         <%= Spree.t(:active) %>
       <% end %>
-    <% end %>
+    </div>
+
   </div>
 </div>

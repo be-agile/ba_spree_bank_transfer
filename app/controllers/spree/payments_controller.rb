@@ -5,8 +5,8 @@ module Spree
     before_action :find_payment
 
     def update
-      payment_details = PaymentDetails.new(@payment, payment_params)
-      if payment_details.save
+      payment_details = Payment::BankUpdater.new(@payment, payment_params)
+      if payment_details.update
         flash[:notice] = Spree.t(:payment_successfully_updated)
       else
         flash[:error] = payment_details.errors.to_sentence
@@ -18,7 +18,7 @@ module Spree
       @payment = if spree_current_user
         spree_current_user.payments.find_by(number: params[:id])
       else
-        Payment.joins(:order).find_by(number: params[:id], spree_orders: {user_id: nil})
+        Payment.joins(:order).find_by(number: params[:id], spree_orders: { user_id: nil })
       end
 
       unless @payment
@@ -28,8 +28,9 @@ module Spree
     end
 
     private
-      def payment_params
-        params.require(:payment).permit(:deposited_on, :bank_name, :account_no, :transaction_reference_no, :receipt)
-      end
+
+    def payment_params
+      params.require(:payment).permit(*Spree::Payment::BANK_ATTRIBUTES)
+    end
   end
 end
