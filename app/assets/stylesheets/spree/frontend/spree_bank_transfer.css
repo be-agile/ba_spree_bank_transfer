@@ -1,9 +1,0 @@
-/*
- *= require jquery-ui
- *= require jquery-ui/datepicker
-*/
-.ui-datepicker {
-  width: 18em; /* fix calendar width */
-  padding: .2em .2em 0;
-}
-.hidden { display: none; }
