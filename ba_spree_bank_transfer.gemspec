@@ -26,6 +26,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_core', '~> 5.3.0'
   s.add_dependency 'spree_admin', '= 5.3.6'
   s.add_dependency 'spree_storefront', '= 5.3.6'
+  # lib/spree_bank_transfer.rb が require し、db/migrate/ が SpreeExtension::Migration を使う
+  s.add_dependency 'spree_extension', '= 0.1.0'
   s.add_dependency 'deface'
 
   # @gem-override マーカーの差分確認に使う開発ツール
